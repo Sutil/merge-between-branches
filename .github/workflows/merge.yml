@@ -22,7 +22,7 @@ jobs:
     steps:
 
       - name: Create folder
-        run: mkdir ./project
+        run: mkdir project
 
       - name: Checkout
         uses: actions/checkout@master
@@ -30,15 +30,15 @@ jobs:
         with:
           repository: ${{ github.event.inputs.project }}
           ref: ${{ github.event.inputs.target }}
-          path: ./project
+          path: project
           token: ${{ secrets.TOKEN }}
 
       - name: See all paths
-        run: ls ./project
+        run: ls project
 
       - name: Marge informations
         run: |
-          cd ./project
+          cd project
 
           echo "======= Dentro da branch project ==========="
 
