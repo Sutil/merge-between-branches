@@ -6,6 +6,10 @@ on:
         description: 'Projeto que deseja executar esta ação'
         required: true
         default: 'Sutil/merge-between-branches'
+      baseBranch:
+        description: 'master ou development'
+        required: true
+        default: master
       branchs:
         description: 'Branchs que irão ser colocadas em hmg'
         required: true
@@ -49,29 +53,32 @@ jobs:
           git config --global user.name ${{ github.actor }}
           git config --global user.email ${{ github.actor }}@users.noreply.github.com
           git config --global user.password ${{ secrets.TOKEN }}
-          git config --global pull.rebase true
 
 
           arr=${{github.event.inputs.branchs}}
           IFS=',' read -ra CLIS <<< "$arr"
           for branch in "${CLIS[@]}"; do
-
-            echo "================ ${branch}  ============"
-            git pull origin ${{ github.event.inputs.target }}
-
             echo "=============== Fething all ====================="
 
             git fetch --all
 
-            echo "=============== pull origin ${branch} ====================="
+            echo "=============== Atualizado destino (${{ github.event.inputs.target }}) com branch base ====================="
+            git pull origin ${{ github.event.inputs.baseBranch }} --no-edit
 
-            git pull origin ${branch}
+            echo "=============== Atualizado origem com branch base ====================="
+            git checkout ${branch}
+            git pull origin ${{ github.event.inputs.baseBranch }} --no-edit
+
+            echo "=============== pull origin ${branch} ====================="
+            git checkout ${{ github.event.inputs.target }}
+            git pull origin ${branch} --no-edit
+
+            echo "=========== enviando ${{ github.event.inputs.target }} para o repo ========== "
+            git pull origin ${{ github.event.inputs.target }} --no-edit
+            git push origin ${{ github.event.inputs.target }}
 
             echo "=========== Merge concluido na branch ${branch} ========== "
           done
 
-          echo "=========== enviando ${{ github.event.inputs.target }} para o repo ========== "
-          git pull origin ${{ github.event.inputs.target }}
-          git push origin ${{ github.event.inputs.target }}
-          echo "=========== SUCESSO ========== "
+        
 
