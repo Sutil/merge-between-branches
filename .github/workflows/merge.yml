@@ -63,18 +63,18 @@ jobs:
             git fetch --all
 
             echo "=============== Atualizado destino (${{ github.event.inputs.target }}) com branch base ====================="
-            git pull origin ${{ github.event.inputs.baseBranch }} --rebase
+            git pull origin ${{ github.event.inputs.baseBranch }}--no-edit
 
             echo "=============== Atualizado origem com branch base ====================="
             git checkout ${branch}
-            git pull origin ${{ github.event.inputs.baseBranch }} --rebase
+            git pull origin ${{ github.event.inputs.baseBranch }}--no-edit
 
             echo "=============== pull origin ${branch} ====================="
             git checkout ${{ github.event.inputs.target }}
-            git pull origin ${branch} --rebase
+            git pull origin ${branch}--no-edit
 
             echo "=========== enviando ${{ github.event.inputs.target }} para o repo ========== "
-            git pull origin ${{ github.event.inputs.target }} --rebase
+            git pull origin ${{ github.event.inputs.target }}--no-edit
             git push origin ${{ github.event.inputs.target }}
 
             echo "=========== Merge concluido na branch ${branch} ========== "
