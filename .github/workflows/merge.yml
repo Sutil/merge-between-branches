@@ -19,6 +19,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
 
+      - name: Create folder
+        run: mkdir ./project
+
       - name: Checkout
         uses: actions/checkout@master
         continue-on-error: true
