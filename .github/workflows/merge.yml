@@ -29,7 +29,7 @@ jobs:
           repository: ${{ github.event.inputs.project }}
           ref: ${{ github.event.inputs.target }}
           path: ./project
-          token: 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
+          token: ${{ secrets.TOKEN }}
 
       - name: See all paths
         run: ls ./project
