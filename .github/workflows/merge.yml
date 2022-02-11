@@ -9,9 +9,11 @@ on:
       branchs:
         description: 'Branchs que irão ser colocadas em hmg'
         required: true
+        default: dev1
       target:
         description: 'Branch alvo'
         required: true
+        default: hmg
 
 
 jobs:
@@ -71,4 +73,4 @@ jobs:
             echo "=========== enviando ${{ github.event.inputs.target }} para o repo ========== "
             git push origin ${{ github.event.inputs.target }}
             echo "=========== SUCESSO ========== "
-            
+
