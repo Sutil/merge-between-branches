@@ -47,6 +47,7 @@ jobs:
           git config --global user.email "${{ github.actor }}"
           git config --global user.name "${{ github.actor }}@users.noreply.github.com"
           git config --global user.password "${{ secrets.TOKEN }}"
+          git config --global pull.ff only  
 
 
           arr=${{github.event.inputs.branchs}}
@@ -56,11 +57,13 @@ jobs:
               echo "================ ${branch}  ============"
               git status
 
+              echo "=============== Fething all ====================="
+
               git fetch --all
 
-              git pull origin "${branch}"
+              echo "=============== pull origin "${branch} ====================="
 
-              git status
+              git pull origin "${branch}"
 
               echo "=========== Merge concluido na branch ${branch} ========== "
             done
