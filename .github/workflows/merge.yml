@@ -71,3 +71,4 @@ jobs:
             echo "=========== enviando ${{ github.event.inputs.target }} para o repo ========== "
             git push origin ${{ github.event.inputs.target }}
             echo "=========== SUCESSO ========== "
+            
