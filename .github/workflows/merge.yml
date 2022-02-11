@@ -6,6 +6,10 @@ on:
         description: 'Projeto que deseja executar esta ação'
         required: true
         default: 'Sutil/merge-between-branches'
+      baseBranch:
+        description: 'master ou development'
+        required: true
+        default: master
       branchs:
         description: 'Branchs que irão ser colocadas em hmg'
         required: true
