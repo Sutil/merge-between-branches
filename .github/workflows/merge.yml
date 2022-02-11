@@ -49,7 +49,7 @@ jobs:
           git config --global user.name ${{ github.actor }}
           git config --global user.email ${{ github.actor }}@users.noreply.github.com
           git config --global user.password ${{ secrets.TOKEN }}
-          git config --global pull.ff only
+          git config --global pull.rebase true
 
 
           arr=${{github.event.inputs.branchs}}
@@ -57,7 +57,7 @@ jobs:
           for branch in "${CLIS[@]}"; do
 
             echo "================ ${branch}  ============"
-            git status
+            git pull origin ${{ github.event.inputs.target }}
 
             echo "=============== Fething all ====================="
 
@@ -71,6 +71,7 @@ jobs:
           done
 
           echo "=========== enviando ${{ github.event.inputs.target }} para o repo ========== "
+          git pull origin ${{ github.event.inputs.target }}
           git push origin ${{ github.event.inputs.target }}
           echo "=========== SUCESSO ========== "
 
