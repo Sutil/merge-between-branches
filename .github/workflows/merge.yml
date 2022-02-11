@@ -62,7 +62,7 @@ jobs:
             git fetch --all
 
             echo "=============== pull origin ${branch} ====================="
-            git merge --no-ff ${branch} -m "Automerge" 
+            git merge --no-ff origin/${branch} -m "Automerge" 
 
             echo "=========== enviando ${{ github.event.inputs.target }} para o repo ========== "
             git push
