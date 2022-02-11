@@ -3,7 +3,7 @@ on:
   workflow_dispatch:
     inputs:
       project:
-        description: 'Projeto que deseja executar está ação'
+        description: 'Projeto que deseja executar esta ação'
         required: true
         default: 'Sutil/merge-between-branches'
       branchs:
@@ -53,24 +53,24 @@ jobs:
 
 
           arr=${{github.event.inputs.branchs}}
-            IFS=',' read -ra CLIS <<< "$arr"
-            for branch in "${CLIS[@]}"; do
+          IFS=',' read -ra CLIS <<< "$arr"
+          for branch in "${CLIS[@]}"; do
 
-              echo "================ ${branch}  ============"
-              git status
+            echo "================ ${branch}  ============"
+            git status
 
-              echo "=============== Fething all ====================="
+            echo "=============== Fething all ====================="
 
-              git fetch --all
+            git fetch --all
 
-              echo "=============== pull origin "${branch} ====================="
+            echo "=============== pull origin ${branch} ====================="
 
-              git pull origin ${branch}
+            git pull origin ${branch}
 
-              echo "=========== Merge concluido na branch ${branch} ========== "
-            done
+            echo "=========== Merge concluido na branch ${branch} ========== "
+          done
 
-            echo "=========== enviando ${{ github.event.inputs.target }} para o repo ========== "
-            git push origin ${{ github.event.inputs.target }}
-            echo "=========== SUCESSO ========== "
+          echo "=========== enviando ${{ github.event.inputs.target }} para o repo ========== "
+          git push origin ${{ github.event.inputs.target }}
+          echo "=========== SUCESSO ========== "
 
