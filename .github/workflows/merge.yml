@@ -62,7 +62,7 @@ jobs:
 
             git fetch --all
 
-            echo "=============== Atualizado destino com branch base ====================="
+            echo "=============== Atualizado destino (${{ github.event.inputs.target }}) com branch base ====================="
             git pull origin ${{ github.event.inputs.baseBranch }} --rebase
 
             echo "=============== Atualizado origem com branch base ====================="
