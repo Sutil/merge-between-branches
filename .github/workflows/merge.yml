@@ -6,10 +6,6 @@ on:
         description: 'Projeto que deseja executar esta ação'
         required: true
         default: 'Sutil/merge-between-branches'
-      baseBranch:
-        description: 'master ou development'
-        required: true
-        default: master
       branchs:
         description: 'Branchs que irão ser colocadas em hmg'
         required: true
@@ -63,8 +59,7 @@ jobs:
             echo "=========== enviando ${{ github.event.inputs.target }} para o repo ========== "
             git push
 
-            echo "=========== Merge concluido na branch ${branch} ========== "
+            echo "=========== Merge concluido para branch ${branch} ========== "
           done
 
         
-
