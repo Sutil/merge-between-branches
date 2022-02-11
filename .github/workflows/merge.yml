@@ -30,15 +30,11 @@ jobs:
 
       - name: Checkout
         uses: actions/checkout@master
-        continue-on-error: true
         with:
           repository: ${{ github.event.inputs.project }}
           ref: ${{ github.event.inputs.target }}
           path: project
           token: ${{ secrets.TOKEN }}
-
-      - name: See all paths
-        run: ls project
 
       - name: Marge informations
         run: |
@@ -62,7 +58,7 @@ jobs:
             git fetch --all
 
             echo "=============== pull origin ${branch} ====================="
-            git merge --no-ff origin/${branch} -m "Automerge" 
+            git merge --no-ff origin/${branch} -m "Automerge" --allow-unrelated-histories
 
             echo "=========== enviando ${{ github.event.inputs.target }} para o repo ========== "
             git push
